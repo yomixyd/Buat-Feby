@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Birthday! 🎂</title>
+    <style>
+        body {
+            background: linear-gradient(to right, #a1c4fd, #c2e9fb);
+            font-family: 'Comic Sans MS', cursive, sans-serif;
+            color: #ffffff;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            flex-direction: column;
+        }
+
+        .popup {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+        .popup-content {
+            background: white;
+            color: black;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            max-width: 400px;
+        }
+        .button {
+            display: inline-block;
+            margin-top: 10px;
+            padding: 10px 20px;
+            background: #ff4081;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .hidden {
+            display: none !important;
+        }
+
+        /* Styling untuk Page 2 */
+        .wrapper {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 20px;
+            position: relative;
+            width: 100%;
+        }
+
+        .container {
+            max-width: 400px;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 12px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+            text-align: center;
+        }
+
+    h1 {
+    font-size: 2em;
+    text-shadow:
+        -1px -1px 0 #000,
+        1px -1px 0 #000,
+        -1px  1px 0 #000,
+        1px  1px 0 #000;
+    animation: fadeIn 2s ease-in-out 1s forwards;
+    color: #ffffff;
+}
+
+    p {
+    font-size: 1.5em;
+    color: #ffffff;
+    text-shadow:
+        -0.5px -0.5px 0 #000,
+        0.5px -0.5px 0 #000,
+        -0.5px  0.5px 0 #000,
+        0.5px  0.5px 0 #000;
+    animation: fadeIn 2s ease-in-out
+    }
+
+         img {
+            width: 100px;
+            height: auto;
+            border-radius: 10px;
+            transition: transform 0.3s ease-in-out;
+        }
+
+        img:hover {
+            transform: scale(1.1);
+        }
+        .side-image-left, .side-image-right {
+            width: 120px; /* Ukuran gambar diperkecil */
+            height: auto;
+        }
+
+        .next-button {
+            margin-top: 20px;
+            padding: 10px 20px;
+            background: #ff4081;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        /* Styling untuk Page 3 */
+        .container-ucapan {
+            width: 80%;
+            max-width: 800px;
+            margin: 20px auto;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            justify-content: center;
+            
+        }
+
+        .box {
+            background: white;
+            color: black;
+            padding: 15px;
+            border-radius: 10px;
+            width: calc(50% - 10px);
+            min-width: 250px;
+            text-align: left;
+            box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.2);
+            word-wrap: break-word;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .box h3 {
+            margin: 5px 0;
+            color: #ff4081;
+            text-align: center;
+        }
+
+        .box p {
+            margin: 10px 0 0;
+            white-space: pre-line;
+        }
+
+        .loading {
+            text-align: center;
+            font-size: 1.2em;
+            margin-top: 20px;
+        }
+
+        @media (max-width: 600px) {
+            .box {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Popup Page 1 -->
+    <div class="popup" id="popup">
+        <div class="popup-content">
+            <h2>Haii :></h2>
+            <p>Ini akan jadi hadiah teraneh yang kamu terima :3
+            </p>
+            <button class="button" onclick="closePopup()">Next</button>
+        </div>
+    </div>
+
+    <!-- Page 2 (Ucapan Selamat Ulang Tahun) -->
+    <div class="wrapper hidden" id="page2">
+        <img class="side-image-left" src="—Pngtree—pink cute cat icon animal_8188672.png" alt="Gambar Kucing Kiri"> 
+
+        <div class="container">
+            <span class="emoji">:3🐱🎂🦝:D</span>
+            <h1>Happy Birthday! 🎉</h1>
+            <p>Semoga harimu menyenangkan dan penuh kebahagiaan! 💖</p>
+            <img src="Febyyyyy.png" alt="Gambar Ulang Tahun">
+        </div>
+
+        <img class="side-image-right" src="—Pngtree—cartoon cat element_5450314.png" alt="Gambar Kucing Kanan">
+    </div>
+
+    <button class="next-button hidden" id="toPage3" onclick="showPage3()">Next</button>
+
+    <!-- Page 3 (List Ucapan) -->
+    <div class="hidden" id="page3">
+        <h1>Ucapan untuk Feby 🎂</h1>
+        <div class="loading" id="loading">Loading...</div>
+        <div class="container-ucapan" id="messageContainer"></div>
+    </div>
+
+    <script>
+        function closePopup() {
+            document.getElementById('popup').classList.add('hidden');
+            document.getElementById('page2').classList.remove('hidden');
+            document.getElementById('toPage3').classList.remove('hidden');
+        }
+
+        function showPage3() {
+            document.getElementById('page2').classList.add('hidden');
+            document.getElementById('toPage3').classList.add('hidden');
+            document.getElementById('page3').classList.remove('hidden');
+            fetchData();
+        }
+
+        async function fetchData() {
+            const sheetUrl = "https://docs.google.com/spreadsheets/d/1JuFVCw624KydiCf-gmUXQTNdkX2yLXuYn088H7kAh-c/gviz/tq?tqx=out:json";
+            const response = await fetch(sheetUrl);
+            const text = await response.text();
+            const json = JSON.parse(text.substr(47).slice(0, -2));
+            const rows = json.table.rows;
+            
+            const container = document.getElementById("messageContainer");
+            const loading = document.getElementById("loading");
+
+            if (rows.length === 0) {
+                loading.innerText = "Belum ada ucapan :(";
+                return;
+            }
+
+            loading.style.display = "none";
+
+            rows.forEach(row => {
+                let nama = row.c[1]?.v || "Anonim";  
+                let ucapan = row.c[2]?.v || "";
+                let saran = row.c[3]?.v || "";
+
+                if (nama.includes("Date(")) {
+                    nama = "Anonim";
+                }
+
+                const messageBox = document.createElement("div");
+                messageBox.classList.add("box");
+                messageBox.innerHTML = `
+                    <h3>${nama}</h3>
+                    <p>${ucapan} ${saran}</p>
+                `;
+                container.appendChild(messageBox);
+            });
+        }
+    </script>
+
+</body>
+</html>
